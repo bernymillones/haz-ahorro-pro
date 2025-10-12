@@ -19,22 +19,22 @@ const activeSavings = [
   {
     id: 2,
     plan: "Plan Avanzado",
-    amount: 5000, // CORREGIDO: 2000 → 5000 (ejemplo de plan avanzado)
+    amount: 3000,
     level: "Avanzado",
     returnRate: "4%",
     startDate: "2025-08-20",
-    currentReturn: 200, // CORREGIDO: 120 → 200 (4% de 5000)
+    currentReturn: 120,
     progress: 40,
     color: "hsl(var(--nivel-avanzado))",
   },
   {
     id: 3,
     plan: "Plan Élite",
-    amount: 30000, // CORREGIDO: 10000 → 30000 (ejemplo de plan élite)
+    amount: 30000,
     level: "Élite",
     returnRate: "6%",
     startDate: "2025-07-10",
-    currentReturn: 1800, // CORREGIDO: 400 → 1800 (6% de 30000)
+    currentReturn: 1800,
     progress: 10,
     color: "hsl(var(--nivel-elite))",
   },

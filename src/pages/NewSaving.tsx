@@ -9,16 +9,16 @@ const plans = {
     { amount: 800, level: "Básico", return: "2% mensual", color: "nivel-basico" },
   ],
   avanzado: [
-    { amount: 1000, level: "Avanzado", return: "3% mensual", color: "nivel-avanzado" },
-    { amount: 1500, level: "Avanzado", return: "3% mensual", color: "nivel-avanzado" },
-    { amount: 2000, level: "Avanzado", return: "3% mensual", color: "nivel-avanzado" },
-    { amount: 3000, level: "Avanzado", return: "3% mensual", color: "nivel-avanzado" },
+    { amount: 1000, level: "Avanzado", return: "4% mensual", color: "nivel-avanzado" },
+    { amount: 3000, level: "Avanzado", return: "4% mensual", color: "nivel-avanzado" },
+    { amount: 5000, level: "Avanzado", return: "4% mensual", color: "nivel-avanzado" },
+    { amount: 8000, level: "Avanzado", return: "4% mensual", color: "nivel-avanzado" },
   ],
   elite: [
-    { amount: 5000, level: "Élite", return: "4% mensual", color: "nivel-elite" },
-    { amount: 8000, level: "Élite", return: "4% mensual", color: "nivel-elite" },
-    { amount: 10000, level: "Élite", return: "4% mensual", color: "nivel-elite" },
-    { amount: 15000, level: "Élite", return: "4% mensual", color: "nivel-elite" },
+    { amount: 10000, level: "Élite", return: "6% mensual", color: "nivel-elite" },
+    { amount: 30000, level: "Élite", return: "6% mensual", color: "nivel-elite" },
+    { amount: 50000, level: "Élite", return: "6% mensual", color: "nivel-elite" },
+    { amount: 80000, level: "Élite", return: "6% mensual", color: "nivel-elite" },
   ],
 };
 
