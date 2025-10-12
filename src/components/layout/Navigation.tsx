@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Home, PlusCircle, History, User } from "lucide-react";
+import { Home, PlusCircle, History, Wallet } from "lucide-react";
 const navItems = [{
   path: "/",
   label: "Mis Ahorros",
@@ -15,8 +15,8 @@ const navItems = [{
   icon: History
 }, {
   path: "/perfil",
-  label: "Perfil",
-  icon: User
+  label: "Wallet",
+  icon: Wallet
 }];
 export default function Navigation() {
   const location = useLocation();

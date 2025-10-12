@@ -4,9 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Wallet, ExternalLink, Shield } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 export default function Profile() {
+  const [walletSaved, setWalletSaved] = useState(false);
+
   const handleSaveWallet = () => {
+    setWalletSaved(true);
     toast({
       title: "Wallet guardada",
       description: "Tu dirección de wallet ha sido actualizada correctamente.",
@@ -18,7 +22,7 @@ export default function Profile() {
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Perfil y Wallet</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Wallet</h1>
           <p className="text-muted-foreground">
             Configura tu wallet de Cryptomus para recibir tus rendimientos
           </p>
@@ -54,7 +58,7 @@ export default function Profile() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-secondary" />
+              <Shield className={`h-5 w-5 ${walletSaved ? 'text-primary' : 'text-secondary'}`} />
               <CardTitle>¿No tienes una wallet?</CardTitle>
             </div>
             <CardDescription>
@@ -77,8 +81,8 @@ export default function Profile() {
             </div>
             <Button
               variant="outline"
-              className="w-full sm:w-auto"
-              onClick={() => window.open('https://cryptomus.com', '_blank')}
+              className="w-full sm:w-auto hover:bg-primary hover:text-primary-foreground hover:border-primary"
+              onClick={() => window.open('https://app.cryptomus.com/es/signup/?ref=n8lpWz', '_blank')}
             >
               <ExternalLink className="h-4 w-4 mr-2" />
               Ir a Cryptomus
