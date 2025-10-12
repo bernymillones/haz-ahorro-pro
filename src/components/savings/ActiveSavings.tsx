@@ -83,7 +83,7 @@ export default function ActiveSavings() {
               </div>
               <div className="text-right">
                 <div className="text-2xl font-bold text-foreground">
-                  ${saving.amount.toLocaleString()}
+                  ${saving.amount.toLocaleString('en-US')}
                 </div>
                 <div className="text-sm text-muted-foreground">USD</div>
               </div>

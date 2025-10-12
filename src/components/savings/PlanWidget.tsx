@@ -87,7 +87,7 @@ export default function PlanWidget({ amount, level, return: returnRate, color }:
             💰 {level}
           </div>
           <h3 className="text-3xl font-bold text-foreground">
-            ${amount.toLocaleString()} USD
+            ${amount.toLocaleString('en-US')} USD
           </h3>
           <div 
             className="text-sm font-medium"
@@ -114,7 +114,7 @@ export default function PlanWidget({ amount, level, return: returnRate, color }:
             </>
           ) : (
             <>
-              🚀 Ahorrar Plan - ${amount.toLocaleString()} USD
+              🚀 Ahorrar Plan - ${amount.toLocaleString('en-US')} USD
             </>
           )}
         </Button>
