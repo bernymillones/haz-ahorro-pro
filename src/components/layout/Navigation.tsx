@@ -28,7 +28,7 @@ export default function Navigation() {
             <div className="text-2xl font-bold">
               <span className="text-primary">Haz</span>
               <span className="text-foreground">Dinero</span>
-              <span className="text-muted-foreground text-sm"> 💰</span>
+              <span className="text-muted-foreground text-3xl"> 💰</span>
             </div>
           </Link>
 
