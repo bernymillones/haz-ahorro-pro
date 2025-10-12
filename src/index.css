@@ -20,7 +20,7 @@ All colors MUST be HSL.
     --nivel-avanzado: 217 100% 49%; /* #0061f8 */
     --nivel-elite: 279 100% 49%; /* #a600fa */
     
-    --primary: 92 45% 56%
+    --primary: 145 100% 41%;
     --primary-foreground: 0 0% 100%;
     --secondary: 217 100% 49%;
     --secondary-foreground: 0 0% 100%;
@@ -51,7 +51,7 @@ All colors MUST be HSL.
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 92 45% 56%
+    --primary: 145 100% 41%;
     --primary-foreground: 0 0% 100%;
     --secondary: 217 100% 49%;
     --secondary-foreground: 0 0% 100%;
