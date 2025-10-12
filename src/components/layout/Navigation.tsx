@@ -27,8 +27,8 @@ export default function Navigation() {
           <Link to="/" className="flex items-center gap-2">
             <div className="text-2xl font-bold">
               <span className="text-primary">AHORROS</span>
-              <span className="text-foreground">HD.O</span>
-              <span className="text-muted-foreground text-3xl"> 💰</span>
+              <span className="text-foreground"> HD.O</span>
+              <span className="text-muted-foreground text-3xl">💰</span>
             </div>
           </Link>
 
