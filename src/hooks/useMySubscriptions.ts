@@ -1,6 +1,6 @@
 // src/hooks/useMySubscriptions.ts
 import { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '@/integrations/supabase/client';
 
 export function useMySubscriptions(supabaseUserId?: string) {
   const [subscriptions, setSubscriptions] = useState<any[]>([]);

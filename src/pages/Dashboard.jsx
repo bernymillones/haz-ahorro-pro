@@ -1,7 +1,7 @@
 // src/pages/Dashboard.tsx
 import React, { useEffect, useState } from 'react';
 import { useParentUser } from '../hooks/useParentUser';
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from '@/integrations/supabase/client';
 import { useMySubscriptions } from '../hooks/useMySubscriptions';
 
 export default function Dashboard() {
