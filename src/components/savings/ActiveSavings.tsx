@@ -38,7 +38,7 @@ export default function ActiveSavings({ userId, loading: parentLoading }: Active
 
     (async () => {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from('savings_plans')
           .select('*')
           .eq('user_id', userId)
@@ -108,7 +108,7 @@ export default function ActiveSavings({ userId, loading: parentLoading }: Active
         const levelInfo = levelConfig[plan.plan_type] || levelConfig.basico;
         const progress = calculateProgress(plan.start_date, plan.months_duration);
         const currentReturn = calculateCurrentReturn(plan.amount, plan.monthly_yield, plan.start_date);
-        const daysActive = calculateDaysActive(plan.plan_date);
+        const daysActive = calculateDaysActive(plan.start_date);
 
         return (
           <Card key={plan.id} className="hover:shadow-md transition-shadow">

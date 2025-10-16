@@ -29,7 +29,7 @@ export default function Home() {
     (async () => {
       try {
         // Buscar usuario por email
-        const { data: existingUser, error: searchError } = await supabase
+        const { data: existingUser, error: searchError } = await (supabase as any)
           .from('users')
           .select('id')
           .eq('email', parentUser.email)
@@ -45,11 +45,11 @@ export default function Home() {
           setUserId(existingUser.id);
         } else {
           // Crear usuario si no existe
-          const { data: newUser, error: createError } = await supabase
+          const { data: newUser, error: createError } = await (supabase as any)
             .from('users')
             .insert([{ 
               email: parentUser.email, 
-              name: parentUser.name || parentUser.email.split('@')[0] 
+              name: (parentUser as any).name || parentUser.email.split('@')[0] 
             }])
             .select()
             .single();
@@ -60,7 +60,9 @@ export default function Home() {
             return;
           }
 
-          setUserId(newUser.id);
+          if (newUser) {
+            setUserId(newUser.id);
+          }
         }
       } catch (err) {
         console.error('Error en useEffect:', err);
@@ -76,7 +78,7 @@ export default function Home() {
     (async () => {
       try {
         // Obtener planes del usuario
-        const { data: plans, error: plansError } = await supabase
+        const { data: plans, error: plansError } = await (supabase as any)
           .from('savings_plans')
           .select('*')
           .eq('user_id', userId);
@@ -88,11 +90,11 @@ export default function Home() {
         }
 
         // Calcular estadísticas
-        const activePlans = plans?.filter(p => p.status === 'activo') || [];
-        const completedPlans = plans?.filter(p => p.status === 'completado') || [];
+        const activePlans = plans?.filter((p: any) => p.status === 'activo') || [];
+        const completedPlans = plans?.filter((p: any) => p.status === 'completado') || [];
         
-        const totalBalance = activePlans.reduce((sum, p) => sum + Number(p.amount), 0);
-        const totalEarnings = activePlans.reduce((sum, p) => {
+        const totalBalance = activePlans.reduce((sum: number, p: any) => sum + Number(p.amount), 0);
+        const totalEarnings = activePlans.reduce((sum: number, p: any) => {
           const monthsActive = Math.max(0, 
             Math.floor((Date.now() - new Date(p.start_date).getTime()) / (1000 * 60 * 60 * 24 * 30))
           );

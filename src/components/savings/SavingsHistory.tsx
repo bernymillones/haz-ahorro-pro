@@ -1,12 +1,26 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Download, FileText } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
-// Datos de ejemplo - en producción vendrán del backend API
-const historyData = [
+interface SavingsHistoryProps {
+  userId: string | null;
+}
+
+interface Transaction {
+  id: string;
+  plan_id: string;
+  amount: number;
+  payment_date: string;
+  status: string;
+  payment_type: string;
+}
+
+const mockHistoryData = [
   {
     id: 1,
     date: "2025-10-01",
@@ -45,7 +59,39 @@ const historyData = [
   },
 ];
 
-export default function SavingsHistory() {
+export default function SavingsHistory({ userId }: SavingsHistoryProps) {
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
+
+    (async () => {
+      try {
+        const { data, error } = await (supabase as any)
+          .from('transactions')
+          .select('*')
+          .order('payment_date', { ascending: false });
+
+        if (error) {
+          console.error('Error cargando transacciones:', error);
+          setTransactions([]);
+        } else {
+          setTransactions(data || []);
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        setTransactions([]);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [userId]);
+
+  const historyData = transactions.length > 0 ? transactions : mockHistoryData;
   const handleExportPDF = () => {
     toast({
       title: "Exportando a PDF",
@@ -90,7 +136,11 @@ export default function SavingsHistory() {
         </div>
       </CardHeader>
       <CardContent>
-        {historyData.length === 0 ? (
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Cargando historial...</p>
+          </div>
+        ) : historyData.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-muted-foreground">
               No hay transacciones registradas aún
@@ -110,30 +160,38 @@ export default function SavingsHistory() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {historyData.map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell>
-                      {new Date(item.date).toLocaleDateString('es-ES', {
-                        day: '2-digit',
-                        month: 'short',
-                        year: 'numeric'
-                      })}
-                    </TableCell>
-                    <TableCell className="font-medium">{item.plan}</TableCell>
-                    <TableCell className="text-right font-mono">
-                      ${item.amount.toLocaleString()} USD
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <Badge variant="outline">{item.returnPercent}%</Badge>
-                    </TableCell>
-                    <TableCell className="text-right font-semibold text-primary">
-                      +${item.earnings.toLocaleString()} USD
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {getStatusBadge(item.status)}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {historyData.map((item: any) => {
+                  const date = item.payment_date || item.date;
+                  const planName = item.plan || 'Plan';
+                  const amount = Number(item.amount);
+                  const returnPercent = item.returnPercent || 2;
+                  const earnings = item.earnings || 0;
+                  
+                  return (
+                    <TableRow key={item.id}>
+                      <TableCell>
+                        {new Date(date).toLocaleDateString('es-ES', {
+                          day: '2-digit',
+                          month: 'short',
+                          year: 'numeric'
+                        })}
+                      </TableCell>
+                      <TableCell className="font-medium">{planName}</TableCell>
+                      <TableCell className="text-right font-mono">
+                        ${amount.toLocaleString()} USD
+                      </TableCell>
+                      <TableCell className="text-center">
+                        <Badge variant="outline">{returnPercent}%</Badge>
+                      </TableCell>
+                      <TableCell className="text-right font-semibold text-primary">
+                        +${earnings.toLocaleString()} USD
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {getStatusBadge(item.status)}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </div>

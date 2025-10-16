@@ -14,7 +14,7 @@ export function useMySubscriptions(supabaseUserId?: string) {
     let cancelled = false;
     async function load() {
       setLoading(true);
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('savings_plans')
         .select('*')
         .eq('user_id', supabaseUserId);
